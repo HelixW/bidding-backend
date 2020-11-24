@@ -1,4 +1,4 @@
-// Admin User
+// Admin response
 export interface Admin {
   email: string
   verified: boolean

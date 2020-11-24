@@ -5,7 +5,7 @@ export class AppService {
   /*
    * Returns a dummy response
    */
-  getStatus(): string {
-    return 'Server is online'
+  getStatus(): { status: string } {
+    return { status: 'Server is online' }
   }
 }

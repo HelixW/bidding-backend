@@ -1,3 +1,4 @@
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 import { ServiceAccount } from 'firebase-admin'
 import { ConfigService } from '@nestjs/config'
 import { NestFactory } from '@nestjs/core'
@@ -24,6 +25,14 @@ async function bootstrap() {
     credential: admin.credential.cert(adminConfig),
     databaseURL: 'https://bidding-portal.firebaseio.com',
   })
+
+  const options = new DocumentBuilder()
+    .setTitle('RC Bidding Portal')
+    .setDescription("Bidding portal for ACM's reverse coding event")
+    .setVersion('1.0.0')
+    .build()
+  const document = SwaggerModule.createDocument(app, options)
+  SwaggerModule.setup('docs', app, document)
 
   await app.listen(8000)
 }
