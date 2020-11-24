@@ -7,6 +7,7 @@ import { verifyDetails } from 'src/common/middlewares/admin.middleware'
   providers: [],
 })
 export class AdminModule {
+  // Apply verifyDetails middleware for all admin routes
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(verifyDetails)
