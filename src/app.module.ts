@@ -1,9 +1,13 @@
-import { Module } from '@nestjs/common'
+import { MiddlewareConsumer, Module } from '@nestjs/common'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { AdminService } from './models/admin/admin.service'
 import { AdminController } from './models/admin/admin.controller'
 import { AdminModule } from './models/admin/admin.module'
+import * as rateLimit from 'express-rate-limit'
+import * as helmet from 'helmet'
+import * as morgan from 'morgan'
+import * as cors from 'cors'
 
 @Module({
   imports: [AdminModule],
@@ -11,5 +15,10 @@ import { AdminModule } from './models/admin/admin.module'
   providers: [AppService, AdminService],
 })
 export class AppModule {
-  consumer.apply(cors(), helmet()).forRoutes(CatsController);
+  configure(consumer: MiddlewareConsumer) {
+    const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 5 })
+    consumer
+      .apply(cors(), helmet(), morgan('common'), limiter)
+      .forRoutes(AdminController)
+  }
 }
