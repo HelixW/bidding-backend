@@ -2,7 +2,7 @@ import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common'
 import {
   checkExists,
   verifyDetails,
-} from 'src/common/middlewares/admin.middleware'
+} from '../../common/middlewares/admin.middleware'
 import { AdminController } from './admin.controller'
 import { AdminService } from './admin.service'
 

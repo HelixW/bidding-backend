@@ -21,4 +21,16 @@ describe('AppController (e2e)', () => {
       .expect(200)
       .expect('Server is online')
   })
+
+  it('/admin/register (POST)', () => {
+    return request(app.getHttpServer())
+      .post('/admin/register')
+      .expect(400)
+      .expect({
+        error: 'auth-0001',
+        message: 'Incorrect username and password',
+        detail:
+          'Ensure that the email is valid and the password provided fits the requirement',
+      })
+  })
 })

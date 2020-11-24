@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express'
 import * as admin from 'firebase-admin'
-import { validDetails } from 'src/config/validation/admin.validator'
+import { validDetails } from '../../config/validation/admin.validator'
 
 /*
  * verifyDetails middleware checks for valid email and password
