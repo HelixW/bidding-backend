@@ -23,6 +23,6 @@ async function bootstrap() {
     databaseURL: 'https://bidding-portal.firebaseio.com',
   })
 
-  await app.listen(3000)
+  await app.listen(8000)
 }
 bootstrap()

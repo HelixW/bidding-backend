@@ -5,7 +5,7 @@ export const validDetails = Joi.object({
   email: Joi.string()
     .email({
       minDomainSegments: 2,
-      tlds: { allow: ['com', 'net'] },
+      tlds: { allow: ['com', 'net', 'in'] },
     })
     .required(),
   // Password requires 1 uppercase, 1 lowercase, 1 numeric and 1 symbolic character

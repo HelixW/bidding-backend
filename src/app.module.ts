@@ -1,7 +1,6 @@
 import { MiddlewareConsumer, Module } from '@nestjs/common'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
-import { AdminService } from './models/admin/admin.service'
 import { AdminController } from './models/admin/admin.controller'
 import { AdminModule } from './models/admin/admin.module'
 import { ConfigModule } from '@nestjs/config'
@@ -12,8 +11,8 @@ import * as cors from 'cors'
 
 @Module({
   imports: [ConfigModule.forRoot(), AdminModule],
-  controllers: [AppController, AdminController],
-  providers: [AppService, AdminService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
