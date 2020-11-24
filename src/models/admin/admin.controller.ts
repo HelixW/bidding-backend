@@ -1,5 +1,5 @@
-import { Body, Controller, Post } from '@nestjs/common'
-import { Admin } from './admin.model'
+import { Body, Controller, HttpCode, Post } from '@nestjs/common'
+import { Admin } from '../../common/types/admin.model'
 import { AdminService } from './admin.service'
 
 @Controller('admin')
@@ -16,5 +16,11 @@ export class AdminController {
     @Body('password') password: string
   ): Promise<Admin> {
     return this.adminService.registerAdmin(email, password)
+  }
+
+  @Post('login')
+  @HttpCode(200)
+  loginAdmin(@Body('email') email: string): Promise<string | Error> {
+    return this.adminService.loginAdmin(email)
   }
 }

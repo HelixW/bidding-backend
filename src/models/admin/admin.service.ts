@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { hash as createHash, genSalt } from 'bcrypt'
 import * as admin from 'firebase-admin'
-import { Admin } from './admin.model'
+import { Admin } from '../../common/types/admin.model'
 
 @Injectable()
 export class AdminService {
@@ -21,5 +21,9 @@ export class AdminService {
       email: createdUser.email,
       verified: createdUser.verified,
     }
+  }
+
+  async loginAdmin(email: string): Promise<string | Error> {
+    return email
   }
 }
