@@ -1,5 +1,8 @@
 import * as Joi from 'joi'
 
+/*
+ * validDetails is the response schema for an admin user
+ */
 export const validDetails = Joi.object({
   // Standard email format with dot net or com domains
   email: Joi.string()

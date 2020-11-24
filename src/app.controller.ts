@@ -6,7 +6,7 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   /*
-   * Shows server status
+   * getStatus is a dummy route which returns a string
    */
   @Get()
   getStatus(): string {

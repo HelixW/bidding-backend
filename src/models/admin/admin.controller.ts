@@ -7,8 +7,8 @@ export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
   /*
-   * Register a new admin user after checking if the user
-   * already exists
+   * registerAdmin adds a new admin user after validating input
+   * and checking if the user already exists
    */
   @Post('register')
   registerAdmin(
@@ -18,6 +18,11 @@ export class AdminController {
     return this.adminService.registerAdmin(email, password)
   }
 
+  /*
+   * loginAdmin returns an access token (JWT) after
+   * validating input, checking if the user is verified and
+   * comparing passwords
+   */
   @Post('login')
   @HttpCode(200)
   loginAdmin(@Body('email') email: string): Promise<Token> {

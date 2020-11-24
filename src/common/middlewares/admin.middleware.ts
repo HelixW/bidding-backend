@@ -1,7 +1,8 @@
+import { validDetails } from '../../config/validation/admin.validator'
 import { NextFunction, Request, Response } from 'express'
 import * as admin from 'firebase-admin'
-import { validDetails } from '../../config/validation/admin.validator'
 import { compare } from 'bcrypt'
+
 /*
  * verifyDetails middleware checks for valid email and password
  * format at the time of admin registration/login
@@ -22,6 +23,10 @@ export const verifyDetails = (
   else next()
 }
 
+/*
+ * verifyDetails middleware checks if user with the given email already
+ * exists at the time of admin registration
+ */
 export const checkExists = async (
   req: Request,
   res: Response,
@@ -29,12 +34,14 @@ export const checkExists = async (
 ) => {
   const { email } = req.body
 
-  const snapshot = await admin
+  const user = await admin
     .firestore()
     .collection('admin')
     .where('email', '==', email)
     .get()
-  if (snapshot.empty) {
+
+  if (user.empty) {
+    // User does not exist
     next()
   } else
     res.status(400).json({
@@ -44,7 +51,11 @@ export const checkExists = async (
     })
 }
 
-export const checkRegistered = async (
+/*
+ * authenticate middleware checks for existing user, checks for verification
+ * and matches password hash to the database document
+ */
+export const authenticate = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -53,13 +64,16 @@ export const checkRegistered = async (
 
   const adminRef = admin.firestore().collection('admin').doc(email)
   const doc = await adminRef.get()
+
   if (!doc.exists) {
+    // User with the given email does not exist
     res.status(400).json({
       error: 'auth-0003',
       message: 'Invalid email or password',
       detail: 'Please check your email and password and try again',
     })
   } else if (!doc.data().verified)
+    // User has not been verified as an admin
     res.status(401).json({
       error: 'auth-0004',
       message: 'Admin not verified',
@@ -67,6 +81,8 @@ export const checkRegistered = async (
     })
   else {
     const validPassword = await compare(password, doc.data().password)
+
+    // Invalid password
     if (!validPassword)
       res.status(401).json({
         error: 'auth-0003',

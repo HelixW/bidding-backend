@@ -1,10 +1,10 @@
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common'
+import { AdminController } from './admin.controller'
 import {
   checkExists,
-  checkRegistered,
+  authenticate,
   verifyDetails,
 } from '../../common/middlewares/admin.middleware'
-import { AdminController } from './admin.controller'
 import { AdminService } from './admin.service'
 
 @Module({
@@ -13,13 +13,15 @@ import { AdminService } from './admin.service'
   providers: [AdminService],
 })
 export class AdminModule {
-  // Apply verifyDetails middleware for all admin routes
   configure(consumer: MiddlewareConsumer) {
+    // verifyDetails and checkExists middlewares for register route
     consumer
       .apply(verifyDetails, checkExists)
       .forRoutes({ path: 'admin/register', method: RequestMethod.POST })
+
+    // verifyDetails and authenticate middlewares for login route
     consumer
-      .apply(verifyDetails, checkRegistered)
+      .apply(verifyDetails, authenticate)
       .forRoutes({ path: 'admin/login', method: RequestMethod.POST })
   }
 }
