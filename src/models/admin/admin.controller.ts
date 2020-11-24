@@ -1,5 +1,5 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common'
-import { Admin } from '../../common/types/admin.model'
+import { Admin, Token } from '../../common/types/admin.model'
 import { AdminService } from './admin.service'
 
 @Controller('admin')
@@ -20,7 +20,7 @@ export class AdminController {
 
   @Post('login')
   @HttpCode(200)
-  loginAdmin(@Body('email') email: string): Promise<string | Error> {
+  loginAdmin(@Body('email') email: string): Promise<Token> {
     return this.adminService.loginAdmin(email)
   }
 }
