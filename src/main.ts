@@ -1,11 +1,11 @@
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
+import { ExpressAdapter } from '@nestjs/platform-express'
 import { ServiceAccount } from 'firebase-admin'
 import { ConfigService } from '@nestjs/config'
 import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
 import * as admin from 'firebase-admin'
 import * as Express from 'express'
-import { ExpressAdapter } from '@nestjs/platform-express'
 
 // Health check
 const server = Express()

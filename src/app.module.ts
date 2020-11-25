@@ -1,6 +1,8 @@
 import { AdminController } from './models/admin/admin.controller'
+import { TeamsController } from './models/teams/teams.controller'
 import { MiddlewareConsumer, Module } from '@nestjs/common'
 import { AdminModule } from './models/admin/admin.module'
+import { TeamsModule } from './models/teams/teams.module'
 import { AppController } from './app.controller'
 import * as rateLimit from 'express-rate-limit'
 import { ConfigModule } from '@nestjs/config'
@@ -10,7 +12,7 @@ import * as morgan from 'morgan'
 import * as cors from 'cors'
 
 @Module({
-  imports: [ConfigModule.forRoot(), AdminModule],
+  imports: [ConfigModule.forRoot(), AdminModule, TeamsModule],
   controllers: [AppController],
   providers: [AppService],
 })
@@ -20,6 +22,6 @@ export class AppModule {
     const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 10 })
     consumer
       .apply(cors(), helmet(), morgan('common'), limiter)
-      .forRoutes(AdminController)
+      .forRoutes(AdminController, TeamsController)
   }
 }
