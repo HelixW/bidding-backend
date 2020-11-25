@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common'
 import { AppService } from './app.service'
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger'
-import { ServerStatus } from './common/dto/dummy.dto'
+import { ServerStatus } from './shared/dto/dummy.dto'
 
 @ApiTags('Status')
 @Controller()

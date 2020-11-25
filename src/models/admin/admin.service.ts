@@ -1,4 +1,4 @@
-import { Admin, Token } from '../../common/types/admin.model'
+import { Admin, Token } from '../../shared/types/admin.model'
 import { hash as createHash, genSalt } from 'bcrypt'
 import { Injectable } from '@nestjs/common'
 import * as admin from 'firebase-admin'
@@ -32,7 +32,9 @@ export class AdminService {
    * loginAdmin returns an access token (JWT) after successful login
    */
   async loginAdmin(email: string): Promise<Token> {
-    const token = sign({ email }, process.env.JWT_SECRET, { expiresIn: '7d' })
+    const token: string = sign({ email }, process.env.JWT_SECRET, {
+      expiresIn: '7d',
+    })
 
     return { token }
   }

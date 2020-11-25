@@ -4,7 +4,7 @@ import {
   checkExists,
   authenticate,
   verifyDetails,
-} from '../../common/middlewares/admin.middleware'
+} from '../../shared/middlewares/admin.middleware'
 import { AdminService } from './admin.service'
 
 @Module({

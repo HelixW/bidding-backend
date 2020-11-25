@@ -1,5 +1,5 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common'
-import { Token, Admin } from '../../common/types/admin.model'
+import { Token, Admin } from '../../shared/types/admin.model'
 import { AdminService } from './admin.service'
 import {
   RegistrationInput,
