@@ -1,15 +1,15 @@
+/*
+ * CreatedUser is the response DTO for successful admin creation
+ */
 export class CreatedUser {
   email: string
   verified: boolean
 }
 
-export class ValidationError {
-  error: string
-  message: string
-  detail: string
-}
-
-export class RegistrationInput {
+/*
+ * LoginInput is the request DTO for admin registration and login
+ */
+export class LoginInput {
   email: string
   password: string
 }

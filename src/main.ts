@@ -40,11 +40,11 @@ const bootstrap = async () => {
   const options = new DocumentBuilder()
     .setTitle('RC Bidding Portal')
     .setDescription("Bidding portal for ACM's reverse coding event")
-    .setVersion('1.0.0')
+    .setVersion('1.1.0')
     .build()
   const document = SwaggerModule.createDocument(app, options)
   SwaggerModule.setup('docs', app, document)
 
-  await app.listen(process.env.PORT || 8080)
+  await app.listen(configService.get<number>('PORT') || 8080)
 }
 bootstrap()

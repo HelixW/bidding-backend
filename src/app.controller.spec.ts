@@ -16,7 +16,9 @@ describe('AppController', () => {
 
   describe('root', () => {
     it('should return "Server is online"', () => {
-      expect(appController.getStatus()).toBe('Server is online')
+      expect(appController.getStatus()).toStrictEqual({
+        status: 'Server is online',
+      })
     })
   })
 })

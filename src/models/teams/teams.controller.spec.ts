@@ -1,12 +1,13 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { TeamsController } from './teams.controller'
+import { TeamsModule } from './teams.module'
 
 describe('TeamsController', () => {
   let controller: TeamsController
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [TeamsController],
+      imports: [TeamsModule],
     }).compile()
 
     controller = module.get<TeamsController>(TeamsController)

@@ -1,17 +1,18 @@
 import * as Joi from 'joi'
 
 /*
- * validDetails is the response schema for an admin user
+ * validDetails is the request schema for an admin user
  */
 export const validDetails = Joi.object({
-  // Standard email format with dot net or com domains
+  // Required :: Standard email format with supporting .com, .net, .in
   email: Joi.string()
     .email({
       minDomainSegments: 2,
       tlds: { allow: ['com', 'net', 'in'] },
     })
     .required(),
-  // Password requires 1 uppercase, 1 lowercase, 1 numeric and 1 symbolic character
+
+  // Required :: Password requires 1 uppercase, 1 lowercase, 1 numeric and 1 symbolic character
   password: Joi.string()
     .regex(
       /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!#.])[A-Za-z\d$@$!%*?&.]{8,20}/

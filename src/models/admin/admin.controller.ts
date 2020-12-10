@@ -1,11 +1,9 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common'
 import { Token, Admin } from '../../shared/types/admin.model'
+import { LoginInput, CreatedUser } from './dto/register.dto'
+import { ErrorResponse } from '../../shared/dto/error.dto'
 import { AdminService } from './admin.service'
-import {
-  RegistrationInput,
-  ValidationError,
-  CreatedUser,
-} from './dto/register.dto'
+import { AccessToken } from './dto/login.dto'
 import {
   ApiBadRequestResponse,
   ApiCreatedResponse,
@@ -14,7 +12,6 @@ import {
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger'
-import { AccessToken } from './dto/login.dto'
 
 @ApiTags('Admin')
 @Controller('admin')
@@ -25,14 +22,14 @@ export class AdminController {
    * registerAdmin adds a new admin user after validating input
    * and checking if the user already exists
    */
-  @ApiBody({ type: RegistrationInput })
+  @ApiBody({ type: LoginInput })
   @ApiCreatedResponse({
     description: 'Admin created successfully',
     type: CreatedUser,
   })
   @ApiBadRequestResponse({
     description: 'Invalid format for email or password',
-    type: ValidationError,
+    type: ErrorResponse,
   })
   @Post('register')
   registerAdmin(
@@ -47,21 +44,25 @@ export class AdminController {
    * validating input, checking if the user is verified and
    * comparing passwords
    */
+  @ApiBody({ type: LoginInput })
   @ApiOkResponse({
-    description: 'Admin created successfully',
+    description: 'Successful admin login',
     type: AccessToken,
   })
   @ApiBadRequestResponse({
     description: 'Invalid format for email or password',
-    type: ValidationError,
+    type: ErrorResponse,
   })
   @ApiUnauthorizedResponse({
     description: 'Unauthorized login',
-    type: ValidationError,
+    type: ErrorResponse,
   })
   @Post('login')
   @HttpCode(200)
-  loginAdmin(@Body('email') email: string): Promise<Token> {
-    return this.adminService.loginAdmin(email)
+  loginAdmin(
+    @Body('email') email: string,
+    @Body('password') password: string
+  ): Promise<Token> {
+    return this.adminService.loginAdmin(email, password)
   }
 }
