@@ -1,5 +1,10 @@
 import { Body, Controller, Post } from '@nestjs/common'
-import { ApiBody, ApiCreatedResponse, ApiTags } from '@nestjs/swagger'
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiCreatedResponse,
+  ApiTags,
+} from '@nestjs/swagger'
 import { Participants } from 'src/shared/types/teams.entity'
 import { CreatedTeam, TeamInput } from './dto/team.dto'
 import { TeamsService } from './teams.service'
@@ -15,6 +20,7 @@ export class TeamsController {
     type: CreatedTeam,
   })
   @Post('create')
+  @ApiBearerAuth()
   createTeam(
     @Body('id') id: number,
     @Body('teamName') teamName: string,

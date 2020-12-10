@@ -10,5 +10,6 @@ export const validTeam = Joi.object({
         isLeader: Joi.boolean().required(),
       }).required()
     )
+    .max(2)
     .required(),
 })

@@ -2,6 +2,7 @@ import { validAdmin } from '../../config/validation/admin.validator'
 import { NextFunction, Request, Response } from 'express'
 import * as admin from 'firebase-admin'
 import { compare } from 'bcrypt'
+import { verify } from 'jsonwebtoken'
 
 /*
  * validateAdmin middleware checks for valid email and password
@@ -90,5 +91,53 @@ export const authenticate = async (
         detail: 'Please check your email and password and try again',
       })
     else next()
+  }
+}
+
+export const authorize = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { authorization } = req.headers
+
+  if (!authorization)
+    res.status(401).json({
+      error: 'auth-0004',
+      message: 'Unauthorized access',
+      detail: 'No token was proviced',
+    })
+  else if (!authorization)
+    res.status(401).json({
+      error: 'auth-0004',
+      message: 'Unauthorized access',
+      detail: 'No authorization header found',
+    })
+  else if (authorization.split(' ')[0] !== 'Bearer')
+    res.status(401).json({
+      error: 'auth-0005',
+      message: 'Unauthorized access',
+      detail: 'Bearer keyword missing from header',
+    })
+  else {
+    const token = authorization.split(' ')[1]
+    if (!token)
+      res.status(401).json({
+        error: 'auth-0006',
+        message: 'Unauthorized access',
+        detail: 'JWT token was not provided',
+      })
+    else {
+      try {
+        verify(token, process.env.JWT_SECRET)
+        next()
+      } catch (_) {
+        res.status(401).json({
+          error: 'auth-0007',
+          message: 'Unauthorized access',
+          detail: 'JWT provided is malformed',
+        })
+      }
+    }
   }
 }

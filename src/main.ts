@@ -41,6 +41,7 @@ const bootstrap = async () => {
     .setTitle('RC Bidding Portal')
     .setDescription("Bidding portal for ACM's reverse coding event")
     .setVersion('1.1.0')
+    .addBearerAuth()
     .build()
   const document = SwaggerModule.createDocument(app, options)
   SwaggerModule.setup('docs', app, document)
