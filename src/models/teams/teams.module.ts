@@ -14,7 +14,8 @@ import { TeamsService } from './teams.service'
 })
 export class TeamsModule {
   configure(consumer: MiddlewareConsumer) {
-    // validateAdmin and checkExists middlewares for register route
+    // validateTeam, checkExists, and authorize middlewares for
+    // team creation route
     consumer
       .apply(validateTeam, checkExists, authorize)
       .forRoutes({ path: 'teams/create', method: RequestMethod.POST })

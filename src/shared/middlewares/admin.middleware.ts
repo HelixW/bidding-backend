@@ -25,7 +25,7 @@ export const validateAdmin = (
 }
 
 /*
- * verifyDetails middleware checks if user with the given email already
+ * checkExists middleware checks if user with the given email already
  * exists at the time of admin registration
  */
 export const checkExists = async (
@@ -86,7 +86,7 @@ export const authenticate = async (
     // Invalid password
     if (!validPassword)
       res.status(401).json({
-        error: 'auth-0003',
+        error: 'auth-0005',
         message: 'Invalid Email or Password',
         detail: 'Please check your email and password and try again',
       })
@@ -94,6 +94,9 @@ export const authenticate = async (
   }
 }
 
+/*
+ * authorize middleware checks for a valid header for admin routes
+ */
 export const authorize = async (
   req: Request,
   res: Response,
@@ -101,29 +104,27 @@ export const authorize = async (
 ) => {
   const { authorization } = req.headers
 
+  // Header is missing
   if (!authorization)
     res.status(401).json({
-      error: 'auth-0004',
-      message: 'Unauthorized access',
-      detail: 'No token was proviced',
-    })
-  else if (!authorization)
-    res.status(401).json({
-      error: 'auth-0004',
+      error: 'auth-0006',
       message: 'Unauthorized access',
       detail: 'No authorization header found',
     })
+  // Bearer keyword missing
   else if (authorization.split(' ')[0] !== 'Bearer')
     res.status(401).json({
-      error: 'auth-0005',
+      error: 'auth-0007',
       message: 'Unauthorized access',
       detail: 'Bearer keyword missing from header',
     })
   else {
     const token = authorization.split(' ')[1]
+
+    // JWT token missing
     if (!token)
       res.status(401).json({
-        error: 'auth-0006',
+        error: 'auth-0008',
         message: 'Unauthorized access',
         detail: 'JWT token was not provided',
       })
@@ -133,7 +134,7 @@ export const authorize = async (
         next()
       } catch (_) {
         res.status(401).json({
-          error: 'auth-0007',
+          error: 'auth-0009',
           message: 'Unauthorized access',
           detail: 'JWT provided is malformed',
         })

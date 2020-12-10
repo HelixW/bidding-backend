@@ -5,7 +5,7 @@ import * as admin from 'firebase-admin'
 @Injectable()
 export class TeamsService {
   /*
-   *
+   * createTeam saves a new team to the database
    */
   async createTeam(
     id: number,
