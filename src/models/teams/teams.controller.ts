@@ -4,6 +4,7 @@ import {
   ApiBearerAuth,
   ApiBody,
   ApiCreatedResponse,
+  ApiNotFoundResponse,
   ApiOkResponse,
   ApiTags,
   ApiUnauthorizedResponse,
@@ -59,6 +60,10 @@ export class TeamsController {
    * fetchTeams controller fetches details of a single team
    */
   @ApiOkResponse({ description: 'Successful team fetch', type: CreatedTeam })
+  @ApiNotFoundResponse({
+    description: 'Team does with the given teamID does not exist',
+    type: ErrorResponse,
+  })
   @Get(':id')
   fetchTeam(@Param('id') id: number): Promise<Team> {
     return this.teamsService.fetchTeam(id)

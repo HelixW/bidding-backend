@@ -56,7 +56,7 @@ export class TeamsService {
     // Team not found
     if (!teamRef.exists)
       throw new NotFoundException({
-        error: 'teams-0004',
+        error: 'teams-0003',
         message: 'Invalid teamID proved',
         detail: 'The team with the teamID provided does not exist',
       })
