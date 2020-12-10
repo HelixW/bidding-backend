@@ -1,19 +1,19 @@
-import { validDetails } from '../../config/validation/admin.validator'
+import { validAdmin } from '../../config/validation/admin.validator'
 import { NextFunction, Request, Response } from 'express'
 import * as admin from 'firebase-admin'
 import { compare } from 'bcrypt'
 
 /*
- * verifyDetails middleware checks for valid email and password
+ * validateAdmin middleware checks for valid email and password
  * format at the time of admin registration/login
  */
-export const verifyDetails = (
+export const validateAdmin = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   // Invalid email or password format
-  if (validDetails.validate(req.body).error)
+  if (validAdmin.validate(req.body).error)
     res.status(400).json({
       error: 'auth-0001',
       message: 'Incorrect username and password',

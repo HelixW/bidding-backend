@@ -1,9 +1,9 @@
 import * as Joi from 'joi'
 
 /*
- * validDetails is the request schema for an admin user
+ * validAdmin is the request schema for an admin user
  */
-export const validDetails = Joi.object({
+export const validAdmin = Joi.object({
   // Required :: Standard email format with supporting .com, .net, .in
   email: Joi.string()
     .email({

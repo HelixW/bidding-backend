@@ -3,7 +3,7 @@ import { AdminController } from './admin.controller'
 import {
   checkExists,
   authenticate,
-  verifyDetails,
+  validateAdmin,
 } from '../../shared/middlewares/admin.middleware'
 import { AdminService } from './admin.service'
 
@@ -14,14 +14,14 @@ import { AdminService } from './admin.service'
 })
 export class AdminModule {
   configure(consumer: MiddlewareConsumer) {
-    // verifyDetails and checkExists middlewares for register route
+    // validateAdmin and checkExists middlewares for register route
     consumer
-      .apply(verifyDetails, checkExists)
+      .apply(validateAdmin, checkExists)
       .forRoutes({ path: 'admin/register', method: RequestMethod.POST })
 
-    // verifyDetails and authenticate middlewares for login route
+    // validateAdmin and authenticate middlewares for login route
     consumer
-      .apply(verifyDetails, authenticate)
+      .apply(validateAdmin, authenticate)
       .forRoutes({ path: 'admin/login', method: RequestMethod.POST })
   }
 }
