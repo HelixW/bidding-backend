@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common'
+import { Body, Controller, Get, Param, Post } from '@nestjs/common'
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
@@ -53,5 +53,14 @@ export class TeamsController {
   @Get()
   fetchTeams(): Promise<Array<Team>> {
     return this.teamsService.fetchTeams()
+  }
+
+  /*
+   * fetchTeams controller fetches details of a single team
+   */
+  @ApiOkResponse({ description: 'Successful team fetch', type: CreatedTeam })
+  @Get(':id')
+  fetchTeam(@Param('id') id: number): Promise<Team> {
+    return this.teamsService.fetchTeam(id)
   }
 }

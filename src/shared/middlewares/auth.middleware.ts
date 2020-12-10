@@ -53,7 +53,7 @@ export const authorize = async (
             message: 'Unauthorized access',
             detail: 'Invalid token provided',
           })
-        next()
+        else next()
       } catch (_) {
         res.status(401).json({
           error: 'auth-0010',
@@ -64,3 +64,42 @@ export const authorize = async (
     }
   }
 }
+
+/*
+ * To Be Implemented :: authorizeParticipant middleware checks whether the googleID belongs
+ * to a participant
+ */
+// export const authorizeParticipant = async (
+//   req: Request,
+//   res: Response,
+//   next: NextFunction
+// ) => {
+//   const { authorization } = req.headers
+
+//   // Header is missing
+//   if (!authorization)
+//     res.status(401).json({
+//       error: 'auth-0006',
+//       message: 'Unauthorized access',
+//       detail: 'No authorization header found',
+//     })
+//   // Bearer keyword missing
+//   else if (authorization.split(' ')[0] !== 'Bearer')
+//     res.status(401).json({
+//       error: 'auth-0007',
+//       message: 'Unauthorized access',
+//       detail: 'Bearer keyword missing from header',
+//     })
+//   else {
+//     const token = authorization.split(' ')[1]
+
+//     // JWT token missing
+//     if (!token)
+//       res.status(401).json({
+//         error: 'auth-0008',
+//         message: 'Unauthorized access',
+//         detail: 'JWT token was not provided',
+//       })
+
+//   }
+// }
