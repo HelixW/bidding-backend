@@ -1,15 +1,32 @@
 import { Test, TestingModule } from '@nestjs/testing'
 import { INestApplication } from '@nestjs/common'
 import * as request from 'supertest'
-import { AdminModule } from './../src/models/admin/admin.module'
+import { AdminService } from '../src/models/admin/admin.service'
+import { AdminController } from '../src/models/admin/admin.controller'
 
-describe('AppController (e2e)', () => {
+describe('AdminController (e2e)', () => {
   let app: INestApplication
 
-  beforeEach(async () => {
+  // Mocks
+  const registerRes = { email: 'test@test.com', verified: true }
+  const loginRes = {
+    token:
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFiY2RAZ21haWwuY29tIiwiaWF0IjoxNjA3NTg1MDY2LCJleHAiOjE2MDgxODk4NjZ9.Xal6NfL3by9MzE3xGaaPcSng_CJ0L97AcxAzdQkIgmE',
+  }
+  const adminService = {
+    registerAdmin: () => registerRes,
+    loginAdmin: () => loginRes,
+  }
+
+  beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AdminModule],
-    }).compile()
+      imports: [],
+      controllers: [AdminController],
+      providers: [AdminService],
+    })
+      .overrideProvider(AdminService)
+      .useValue(adminService)
+      .compile()
 
     app = moduleFixture.createNestApplication()
     await app.init()
@@ -18,24 +35,18 @@ describe('AppController (e2e)', () => {
   it('/admin/register (POST)', () => {
     return request(app.getHttpServer())
       .post('/admin/register')
-      .expect(400)
-      .expect({
-        error: 'auth-0001',
-        message: 'Incorrect username and password',
-        detail:
-          'Ensure that the email is valid and the password provided fits the requirement',
-      })
+      .expect(201)
+      .expect(registerRes)
   })
 
   it('/admin/login (POST)', () => {
     return request(app.getHttpServer())
       .post('/admin/login')
-      .expect(400)
-      .expect({
-        error: 'auth-0001',
-        message: 'Incorrect username and password',
-        detail:
-          'Ensure that the email is valid and the password provided fits the requirement',
-      })
+      .expect(200)
+      .expect(loginRes)
+  })
+
+  afterAll(async () => {
+    await app.close()
   })
 })

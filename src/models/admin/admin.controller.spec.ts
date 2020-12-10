@@ -29,6 +29,7 @@ describe('AdminController', () => {
       res
     )
   })
+
   it('should login admin', async () => {
     // Mock login
     const res = {
