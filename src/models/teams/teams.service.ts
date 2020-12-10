@@ -26,4 +26,20 @@ export class TeamsService {
 
     return createdTeam
   }
+
+  /*
+   * fetchTeams returns the details of all teams
+   */
+  async fetchTeams() {
+    const teamsRef = admin.firestore().collection('teams')
+
+    // Create teams array
+    const teams = []
+    const snapshot = await teamsRef.get()
+    snapshot.forEach((doc) => {
+      teams.push(doc.data())
+    })
+
+    return teams
+  }
 }

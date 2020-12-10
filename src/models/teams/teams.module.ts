@@ -1,5 +1,5 @@
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common'
-import { authorize } from 'src/shared/middlewares/admin.middleware'
+import { authorize } from '../../shared/middlewares/auth.middleware'
 import {
   checkExists,
   validateTeam,

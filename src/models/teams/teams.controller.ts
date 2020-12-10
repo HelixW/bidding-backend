@@ -1,14 +1,15 @@
-import { Body, Controller, Post } from '@nestjs/common'
+import { Body, Controller, Get, Post } from '@nestjs/common'
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
   ApiBody,
   ApiCreatedResponse,
+  ApiOkResponse,
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger'
 import { ErrorResponse } from 'src/shared/dto/error.dto'
-import { Participants } from 'src/shared/types/teams.entity'
+import { Participants, Team } from 'src/shared/types/teams.entity'
 import { CreatedTeam, TeamInput } from './dto/team.dto'
 import { TeamsService } from './teams.service'
 
@@ -41,7 +42,16 @@ export class TeamsController {
     @Body('id') id: number,
     @Body('teamName') teamName: string,
     @Body('participants') participants: Array<Participants>
-  ) {
+  ): Promise<Team> {
     return this.teamsService.createTeam(id, teamName, participants)
+  }
+
+  /*
+   * fetchTeams controller fetches details of all teams
+   */
+  @ApiOkResponse({ description: 'Successful teams fetch', type: [CreatedTeam] })
+  @Get()
+  fetchTeams(): Promise<Array<Team>> {
+    return this.teamsService.fetchTeams()
   }
 }

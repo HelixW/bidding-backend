@@ -32,9 +32,13 @@ export class AdminService {
    * loginAdmin returns an access token (JWT) after successful login
    */
   async loginAdmin(email: string, _: string): Promise<Token> {
-    const token: string = sign({ email }, process.env.JWT_SECRET, {
-      expiresIn: '7d',
-    })
+    const token: string = sign(
+      { email, googleID: null },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: '7d',
+      }
+    )
 
     return { token }
   }
