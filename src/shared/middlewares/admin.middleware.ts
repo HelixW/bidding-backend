@@ -2,6 +2,7 @@ import { validAdmin } from '../../config/validation/admin.validator'
 import { NextFunction, Request, Response } from 'express'
 import * as admin from 'firebase-admin'
 import { compare } from 'bcrypt'
+import { BadRequestException, UnauthorizedException } from '@nestjs/common'
 
 /*
  * validateAdmin middleware checks for valid email and password
@@ -9,12 +10,12 @@ import { compare } from 'bcrypt'
  */
 export const validateAdmin = (
   req: Request,
-  res: Response,
+  _: Response,
   next: NextFunction
 ) => {
   // Invalid email or password format
   if (validAdmin.validate(req.body).error)
-    res.status(400).json({
+    throw new BadRequestException({
       error: 'auth-0001',
       message: 'Incorrect username and password',
       detail:
@@ -29,7 +30,7 @@ export const validateAdmin = (
  */
 export const checkExists = async (
   req: Request,
-  res: Response,
+  _: Response,
   next: NextFunction
 ) => {
   const { email } = req.body
@@ -44,7 +45,7 @@ export const checkExists = async (
     // User does not exist
     next()
   } else
-    res.status(400).json({
+    throw new BadRequestException({
       error: 'auth-0002',
       message: 'User already exists',
       detail: 'An admin with the provided email already exists',
@@ -57,7 +58,7 @@ export const checkExists = async (
  */
 export const authenticate = async (
   req: Request,
-  res: Response,
+  _: Response,
   next: NextFunction
 ) => {
   const { email, password } = req.body
@@ -67,14 +68,14 @@ export const authenticate = async (
 
   if (!doc.exists) {
     // User with the given email does not exist
-    res.status(400).json({
+    throw new BadRequestException({
       error: 'auth-0003',
       message: 'Invalid email or password',
       detail: 'Please check your email and password and try again',
     })
   } else if (!doc.data().verified)
     // User has not been verified as an admin
-    res.status(401).json({
+    throw new UnauthorizedException({
       error: 'auth-0004',
       message: 'Admin not verified',
       detail: 'Your account has not been verified, please contact the author',
@@ -84,7 +85,7 @@ export const authenticate = async (
 
     // Invalid password
     if (!validPassword)
-      res.status(401).json({
+      throw new UnauthorizedException({
         error: 'auth-0005',
         message: 'Invalid Email or Password',
         detail: 'Please check your email and password and try again',

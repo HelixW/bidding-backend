@@ -1,3 +1,4 @@
+import { BadRequestException, UnauthorizedException } from '@nestjs/common'
 import { NextFunction, Request, Response } from 'express'
 import * as admin from 'firebase-admin'
 import { verify } from 'jsonwebtoken'
@@ -8,21 +9,21 @@ import { JWT } from '../types/auth.entity'
  */
 export const authorize = async (
   req: Request,
-  res: Response,
+  _: Response,
   next: NextFunction
 ) => {
   const { authorization } = req.headers
 
   // Header is missing
   if (!authorization)
-    res.status(401).json({
+    throw new UnauthorizedException({
       error: 'auth-0006',
       message: 'Unauthorized access',
       detail: 'No authorization header found',
     })
   // Bearer keyword missing
   else if (authorization.split(' ')[0] !== 'Bearer')
-    res.status(401).json({
+    throw new UnauthorizedException({
       error: 'auth-0007',
       message: 'Unauthorized access',
       detail: 'Bearer keyword missing from header',
@@ -32,7 +33,7 @@ export const authorize = async (
 
     // JWT token missing
     if (!token)
-      res.status(401).json({
+      throw new UnauthorizedException({
         error: 'auth-0008',
         message: 'Unauthorized access',
         detail: 'JWT token was not provided',
@@ -48,14 +49,14 @@ export const authorize = async (
         const doc = await adminRef.get()
 
         if (!doc.exists)
-          res.status(400).json({
+          throw new BadRequestException({
             error: 'auth-0009',
             message: 'Unauthorized access',
             detail: 'Invalid token provided',
           })
         else next()
       } catch (_) {
-        res.status(401).json({
+        throw new UnauthorizedException({
           error: 'auth-0010',
           message: 'Unauthorized access',
           detail: 'JWT provided is malformed',
@@ -64,42 +65,3 @@ export const authorize = async (
     }
   }
 }
-
-/*
- * To Be Implemented :: authorizeParticipant middleware checks whether the googleID belongs
- * to a participant
- */
-// export const authorizeParticipant = async (
-//   req: Request,
-//   res: Response,
-//   next: NextFunction
-// ) => {
-//   const { authorization } = req.headers
-
-//   // Header is missing
-//   if (!authorization)
-//     res.status(401).json({
-//       error: 'auth-0006',
-//       message: 'Unauthorized access',
-//       detail: 'No authorization header found',
-//     })
-//   // Bearer keyword missing
-//   else if (authorization.split(' ')[0] !== 'Bearer')
-//     res.status(401).json({
-//       error: 'auth-0007',
-//       message: 'Unauthorized access',
-//       detail: 'Bearer keyword missing from header',
-//     })
-//   else {
-//     const token = authorization.split(' ')[1]
-
-//     // JWT token missing
-//     if (!token)
-//       res.status(401).json({
-//         error: 'auth-0008',
-//         message: 'Unauthorized access',
-//         detail: 'JWT token was not provided',
-//       })
-
-//   }
-// }
