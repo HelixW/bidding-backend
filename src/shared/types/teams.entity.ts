@@ -1,7 +1,7 @@
 export interface Team {
   id: string
   teamName: string
-  participants: Participants
+  participants: Array<Participants>
   biddingPoints: number
   questions: Array<string>
 }

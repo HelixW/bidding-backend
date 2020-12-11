@@ -3,7 +3,7 @@ import { authorize } from '../../shared/middlewares/auth.middleware'
 import {
   checkExists,
   validateTeam,
-} from 'src/shared/middlewares/teams.middleware'
+} from '../../shared/middlewares/teams.middleware'
 import { TeamsController } from './teams.controller'
 import { TeamsService } from './teams.service'
 

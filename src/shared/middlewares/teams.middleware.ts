@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import { validTeam } from 'src/config/validation/teams.validator'
+import { validTeam } from '../../config/validation/teams.validator'
 import * as admin from 'firebase-admin'
 
 /*
