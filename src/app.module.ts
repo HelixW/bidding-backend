@@ -7,19 +7,20 @@ import { AppController } from './app.controller'
 import * as rateLimit from 'express-rate-limit'
 import { ConfigModule } from '@nestjs/config'
 import { AppService } from './app.service'
+import { BiddingModule } from './models/bidding/bidding.module'
 import * as helmet from 'helmet'
 import * as morgan from 'morgan'
 import * as cors from 'cors'
 
 @Module({
-  imports: [ConfigModule.forRoot(), AdminModule, TeamsModule],
+  imports: [ConfigModule.forRoot(), AdminModule, TeamsModule, BiddingModule],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     // Basic security
-    const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 10 })
+    const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 50 })
     consumer
       .apply(cors(), helmet(), morgan('common'), limiter)
       .forRoutes(AdminController, TeamsController)
