@@ -19,4 +19,14 @@ export class BiddingService {
     const newRound = (await (await docRef.get()).data()) as Round
     return newRound
   }
+
+  /*
+   * fetchDetails gets the details of for the current round
+   */
+  async fetchDetails(): Promise<Round> {
+    const docRef = admin.firestore().collection('bidding').doc('details')
+
+    const newRound = (await (await docRef.get()).data()) as Round
+    return newRound
+  }
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common'
+import { Body, Controller, Get, Post } from '@nestjs/common'
 import { Question } from '../../shared/types/question.interface'
 import { ErrorResponse } from '../../shared/dto/error.dto'
 import { Round } from '../../shared/types/round.interface'
@@ -9,6 +9,7 @@ import {
   ApiBearerAuth,
   ApiBody,
   ApiCreatedResponse,
+  ApiOkResponse,
   ApiTags,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger'
@@ -42,5 +43,17 @@ export class BiddingController {
     @Body('minBid') minBid: number
   ): Promise<Round> {
     return this.biddingService.initializeRound(name, questions, minBid)
+  }
+
+  /*
+   * fetchDetails controller returns the details of the current round
+   */
+  @ApiOkResponse({
+    description: 'Successful fetch',
+    type: RoundDetails,
+  })
+  @Get()
+  fetchDetails(): Promise<Round> {
+    return this.biddingService.fetchDetails()
   }
 }

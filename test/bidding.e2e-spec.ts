@@ -28,6 +28,7 @@ describe('BiddingController (e2e)', () => {
   } as Round
   const biddingService = {
     initializeRound: () => roundRes,
+    fetchDetails: () => roundRes,
   }
 
   beforeAll(async () => {
@@ -48,6 +49,13 @@ describe('BiddingController (e2e)', () => {
     return request(app.getHttpServer())
       .post('/bidding/initialize')
       .expect(201)
+      .expect(roundRes)
+  })
+
+  it('/bidding (GET)', () => {
+    return request(app.getHttpServer())
+      .get('/bidding')
+      .expect(200)
       .expect(roundRes)
   })
 

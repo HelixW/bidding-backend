@@ -43,11 +43,18 @@ describe('BiddingController', () => {
   })
 
   it('should initialize round', async () => {
-    // Mock team creation
+    // Mock round creation
     jest.spyOn(service, 'initializeRound').mockImplementation(async () => res)
 
     expect(await controller.initializeRound('Test Round', questions, 200)).toBe(
       res
     )
+  })
+
+  it('should fetch round details', async () => {
+    // Mock round fetch
+    jest.spyOn(service, 'fetchDetails').mockImplementation(async () => res)
+
+    expect(await controller.fetchDetails()).toBe(res)
   })
 })
