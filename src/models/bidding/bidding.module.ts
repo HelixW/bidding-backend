@@ -1,4 +1,6 @@
-import { Module } from '@nestjs/common'
+import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common'
+import { validateRound } from 'src/shared/middlewares/bidding.middleware'
+import { authorize } from 'src/shared/middlewares/auth.middleware'
 import { BiddingController } from './bidding.controller'
 import { BiddingService } from './bidding.service'
 
@@ -6,4 +8,12 @@ import { BiddingService } from './bidding.service'
   controllers: [BiddingController],
   providers: [BiddingService],
 })
-export class BiddingModule {}
+export class BiddingModule {
+  configure(consumer: MiddlewareConsumer) {
+    // validateRound, and authorize middlewares for
+    // round initialization route
+    consumer
+      .apply(validateRound, authorize)
+      .forRoutes({ path: 'bidding/initialize', method: RequestMethod.POST })
+  }
+}
