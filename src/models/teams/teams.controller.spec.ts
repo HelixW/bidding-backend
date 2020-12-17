@@ -1,9 +1,9 @@
+import { Team } from '../../shared/types/teams.interface'
 import { Test, TestingModule } from '@nestjs/testing'
 import { TeamsController } from './teams.controller'
 import { TeamsService } from './teams.service'
-import { TeamsModule } from './teams.module'
-import { Team } from '../../shared/types/teams.interface'
 import { Participants } from './dto/team.dto'
+import { TeamsModule } from './teams.module'
 
 describe('TeamsController', () => {
   let controller: TeamsController

@@ -1,6 +1,6 @@
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common'
-import { validateRound } from 'src/shared/middlewares/bidding.middleware'
-import { authorize } from 'src/shared/middlewares/auth.middleware'
+import { validateRound } from '../../shared/middlewares/bidding.middleware'
+import { authorize } from '../../shared/middlewares/auth.middleware'
 import { BiddingController } from './bidding.controller'
 import { BiddingService } from './bidding.service'
 

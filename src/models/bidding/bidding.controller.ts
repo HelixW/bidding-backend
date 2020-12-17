@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common'
-import { Question } from 'src/shared/types/question.interface'
-import { ErrorResponse } from 'src/shared/dto/error.dto'
-import { Round } from 'src/shared/types/round.interface'
+import { Question } from '../../shared/types/question.interface'
+import { ErrorResponse } from '../../shared/dto/error.dto'
+import { Round } from '../../shared/types/round.interface'
 import { BiddingService } from './bidding.service'
 import { RoundDetails } from './dto/round.dto'
 import {

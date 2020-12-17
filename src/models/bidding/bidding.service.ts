@@ -1,4 +1,4 @@
-import { Round } from 'src/shared/types/round.interface'
+import { Round } from '../../shared/types/round.interface'
 import { Injectable } from '@nestjs/common'
 import * as admin from 'firebase-admin'
 
