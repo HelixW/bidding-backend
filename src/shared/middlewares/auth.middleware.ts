@@ -2,7 +2,7 @@ import { BadRequestException, UnauthorizedException } from '@nestjs/common'
 import { NextFunction, Request, Response } from 'express'
 import * as admin from 'firebase-admin'
 import { verify } from 'jsonwebtoken'
-import { JWT } from '../types/auth.entity'
+import { JWT } from '../types/auth.interface'
 
 /*
  * authorize middleware checks for a valid header for admin routes

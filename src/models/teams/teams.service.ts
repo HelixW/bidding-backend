@@ -1,4 +1,4 @@
-import { Participants, Team } from '../../shared/types/teams.entity'
+import { Participants, Team } from '../../shared/types/teams.interface'
 import { Injectable, NotFoundException } from '@nestjs/common'
 import * as admin from 'firebase-admin'
 

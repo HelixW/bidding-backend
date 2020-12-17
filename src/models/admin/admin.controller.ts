@@ -1,5 +1,5 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common'
-import { Token, Admin } from '../../shared/types/admin.entity'
+import { Token, Admin } from '../../shared/types/admin.interface'
 import { LoginInput, CreatedUser } from './dto/register.dto'
 import { ErrorResponse } from '../../shared/dto/error.dto'
 import { AdminService } from './admin.service'

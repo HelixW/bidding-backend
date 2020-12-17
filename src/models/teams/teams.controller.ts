@@ -10,7 +10,7 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger'
 import { ErrorResponse } from '../../shared/dto/error.dto'
-import { Participants, Team } from '../../shared/types/teams.entity'
+import { Participants, Team } from '../../shared/types/teams.interface'
 import { CreatedTeam, TeamInput } from './dto/team.dto'
 import { TeamsService } from './teams.service'
 

@@ -1,5 +1,5 @@
 import { TeamsController } from '../src/models/teams/teams.controller'
-import { Participants, Team } from '../src/shared/types/teams.entity'
+import { Participants, Team } from '../src/shared/types/teams.interface'
 import { TeamsService } from '../src/models/teams/teams.service'
 import { Test, TestingModule } from '@nestjs/testing'
 import { INestApplication } from '@nestjs/common'

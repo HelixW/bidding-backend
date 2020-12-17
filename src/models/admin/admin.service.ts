@@ -1,4 +1,4 @@
-import { Admin, Token } from '../../shared/types/admin.entity'
+import { Admin, Token } from '../../shared/types/admin.interface'
 import { hash as createHash, genSalt } from 'bcrypt'
 import { Injectable } from '@nestjs/common'
 import * as admin from 'firebase-admin'

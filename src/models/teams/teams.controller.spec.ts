@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing'
 import { TeamsController } from './teams.controller'
 import { TeamsService } from './teams.service'
 import { TeamsModule } from './teams.module'
-import { Team } from '../../shared/types/teams.entity'
+import { Team } from '../../shared/types/teams.interface'
 import { Participants } from './dto/team.dto'
 
 describe('TeamsController', () => {
