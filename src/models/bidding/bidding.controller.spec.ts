@@ -23,10 +23,12 @@ describe('BiddingController', () => {
     questions = [
       {
         id: '1234',
+        start: 1608190500000,
         expiry: 1608190500000,
       },
       {
         id: '5678',
+        start: 1608190500000,
         expiry: 1608190500000,
       },
     ] as Array<Question>

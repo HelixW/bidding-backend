@@ -12,5 +12,6 @@ export class RoundDetails {
  */
 export class Question {
   id: string
+  start: number
   expiry: number
 }
