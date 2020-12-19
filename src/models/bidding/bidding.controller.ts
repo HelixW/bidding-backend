@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common'
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common'
 import { Question } from '../../shared/types/question.interface'
 import { ErrorResponse } from '../../shared/dto/error.dto'
 import { Round } from '../../shared/types/round.interface'
@@ -61,5 +61,26 @@ export class BiddingController {
   @Get()
   fetchDetails(): Promise<Round> {
     return this.biddingService.fetchDetails()
+  }
+
+  /*
+   * allocateQuestion sets allocated to true for a particular quesiton
+   */
+  @ApiBearerAuth()
+  @ApiOkResponse({
+    description: 'Successful allocation',
+    type: RoundDetails,
+  })
+  @ApiBadRequestResponse({
+    description: 'Invalid request',
+    type: ErrorResponse,
+  })
+  @ApiUnauthorizedResponse({
+    description: 'Unauthorized action',
+    type: ErrorResponse,
+  })
+  @Put('allocate/:id')
+  allocateQuestion(@Param('id') id: number): Promise<Round> {
+    return this.biddingService.allocateQuestion(id)
   }
 }

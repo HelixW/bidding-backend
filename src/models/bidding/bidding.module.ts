@@ -15,5 +15,10 @@ export class BiddingModule {
     consumer
       .apply(validateRound, authorize)
       .forRoutes({ path: 'bidding/initialize', method: RequestMethod.POST })
+
+    // authorize for allocate route
+    consumer
+      .apply(authorize)
+      .forRoutes({ path: 'bidding/allocate/:id', method: RequestMethod.PUT })
   }
 }
