@@ -1,7 +1,6 @@
 import { Round } from '../../shared/types/round.interface'
 import { Injectable } from '@nestjs/common'
 import * as admin from 'firebase-admin'
-
 @Injectable()
 export class BiddingService {
   /*
@@ -15,6 +14,8 @@ export class BiddingService {
       name,
       questions,
       minBid,
+      service: true,
+      allocated: false,
     })
     const newRound = (await (await docRef.get()).data()) as Round
     return newRound

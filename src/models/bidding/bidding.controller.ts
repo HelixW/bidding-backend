@@ -2,8 +2,8 @@ import { Body, Controller, Get, Post } from '@nestjs/common'
 import { Question } from '../../shared/types/question.interface'
 import { ErrorResponse } from '../../shared/dto/error.dto'
 import { Round } from '../../shared/types/round.interface'
+import { RoundDetails, RoundInput } from './dto/round.dto'
 import { BiddingService } from './bidding.service'
-import { RoundDetails } from './dto/round.dto'
 import {
   ApiBadRequestResponse,
   ApiBearerAuth,
@@ -23,7 +23,7 @@ export class BiddingController {
    * initializeRound controller sets details for each bidding round
    */
   @ApiBearerAuth()
-  @ApiBody({ type: RoundDetails })
+  @ApiBody({ type: RoundInput })
   @ApiCreatedResponse({
     description: 'Round created successfully',
     type: RoundDetails,
@@ -41,7 +41,7 @@ export class BiddingController {
     @Body('name') name: string,
     @Body('questions') questions: Array<Question>,
     @Body('minBid') minBid: number
-  ): Promise<Round> {
+  ): Promise<RoundInput> {
     return this.biddingService.initializeRound(name, questions, minBid)
   }
 
