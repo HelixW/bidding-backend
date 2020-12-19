@@ -23,6 +23,7 @@ export class Question {
  */
 export class RoundInput {
   name: string
+  startTime: string
   questions: Array<QuestionInput>
   minBid: number
 }
@@ -32,6 +33,4 @@ export class RoundInput {
  */
 export class QuestionInput {
   id: string
-  start: number
-  expiry: number
 }

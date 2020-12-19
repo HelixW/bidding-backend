@@ -6,10 +6,16 @@ export class BiddingService {
   /*
    * initializeRound sets details of for the current round
    */
-  async initializeRound(name, questions, minBid): Promise<Round> {
+  async initializeRound(name, questions, startTime, minBid): Promise<Round> {
     const docRef = admin.firestore().collection('bidding').doc('details')
 
+    // Assign time for each question and set allocated to false for each question
+    let d = new Date(startTime)
     questions.forEach((question) => {
+      d = new Date(d.getTime() + 30000)
+      question.start = d.getTime()
+      d = new Date(d.getTime() + 150000)
+      question.expiry = d.getTime()
       question.allocated = false
     })
 

@@ -40,9 +40,15 @@ export class BiddingController {
   initializeRound(
     @Body('name') name: string,
     @Body('questions') questions: Array<Question>,
+    @Body('startTime') startTime: string,
     @Body('minBid') minBid: number
-  ): Promise<RoundInput> {
-    return this.biddingService.initializeRound(name, questions, minBid)
+  ): Promise<Round> {
+    return this.biddingService.initializeRound(
+      name,
+      questions,
+      startTime,
+      minBid
+    )
   }
 
   /*
