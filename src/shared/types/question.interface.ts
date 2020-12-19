@@ -3,4 +3,5 @@ export interface Question {
   start: number
   expiry: number
   allocated: boolean
+  minBid: number
 }

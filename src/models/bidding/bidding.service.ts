@@ -12,11 +12,18 @@ export class BiddingService {
 
     // Assign time for each question and set allocated to false for each question
     let d = new Date(startTime)
-    questions.forEach((question) => {
+    questions.forEach((question, i) => {
+      // Set minimum bid
+      if (i < 20) question.minBid = minBid
+      else question.minBid = minBid * 2
+
+      // Set start and expiry
       d = new Date(d.getTime() + 30000)
       question.start = d.getTime()
       d = new Date(d.getTime() + 150000)
       question.expiry = d.getTime()
+
+      // Set allocated
       question.allocated = false
     })
 
@@ -24,7 +31,6 @@ export class BiddingService {
     await docRef.set({
       name,
       questions,
-      minBid,
       service: true,
     })
     const newRound = (await (await docRef.get()).data()) as Round

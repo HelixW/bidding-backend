@@ -4,5 +4,4 @@ export interface Round {
   name: string
   startTime: string
   questions: Array<Question>
-  minBid: number
 }

@@ -4,7 +4,6 @@
 export class RoundDetails {
   name: string
   questions: Array<Question>
-  minBid: number
   service: boolean
 }
 
@@ -16,6 +15,7 @@ export class Question {
   start: number
   expiry: number
   allocated: boolean
+  minBid: number
 }
 
 /*
