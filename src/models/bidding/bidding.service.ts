@@ -9,13 +9,16 @@ export class BiddingService {
   async initializeRound(name, questions, minBid): Promise<Round> {
     const docRef = admin.firestore().collection('bidding').doc('details')
 
+    questions.forEach((question) => {
+      question.allocated = false
+    })
+
     // Saving and fetching details of the new round
     await docRef.set({
       name,
       questions,
       minBid,
       service: true,
-      allocated: false,
     })
     const newRound = (await (await docRef.get()).data()) as Round
     return newRound
