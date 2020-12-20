@@ -2,6 +2,7 @@ import { Round } from '../../shared/types/round.interface'
 import { BadRequestException, Injectable } from '@nestjs/common'
 import * as admin from 'firebase-admin'
 import { Question } from 'src/shared/types/question.interface'
+import { Team } from 'src/shared/types/teams.interface'
 @Injectable()
 export class BiddingService {
   /*
@@ -50,7 +51,7 @@ export class BiddingService {
   /*
    * allocateQuestion sets allocated to true for the proviced questionID
    */
-  async allocateQuestion(questionID) {
+  async allocateQuestion(questionID, teamID) {
     const docRef = admin.firestore().collection('bidding').doc('details')
     const roundDetails = (await (await docRef.get()).data()) as Round
 
@@ -77,12 +78,17 @@ export class BiddingService {
     // Update allocated
     roundDetails.questions.forEach((q) => {
       if (q.id === questionID) {
-        console.log(q.id)
-        console.log(questionID)
         q.allocated = true
       }
     })
     await docRef.set(roundDetails)
+
+    // Allocate question
+    const teamRef = admin.firestore().collection('teams').doc(teamID)
+    const teamDetails = (await (await teamRef.get()).data()) as Team
+    teamDetails.questions.push(questionID)
+
+    await teamRef.set(teamDetails)
 
     const updatedDetails = (await (await docRef.get()).data()) as Round
     return updatedDetails

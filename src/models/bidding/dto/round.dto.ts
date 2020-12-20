@@ -34,3 +34,8 @@ export class RoundInput {
 export class QuestionInput {
   id: string
 }
+
+export class AllocateInput {
+  id: string
+  teamID: string
+}

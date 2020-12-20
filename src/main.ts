@@ -14,7 +14,7 @@ server.get('/_ah/health', (_, res) => res.send('OK'))
 
 const bootstrap = async () => {
   const app = await NestFactory.create(AppModule, new ExpressAdapter(server))
-
+  app.enableCors()
   // Environment variables
   const configService: ConfigService = app.get(ConfigService)
 
