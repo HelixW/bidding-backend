@@ -19,9 +19,9 @@
     Server deals with feeding in of round data and all administrative actions and allotment of questions to the respective teams.
     <br />
     <br />
-    <a href="https://github.com/helixw/bidding-backend">Report Bug</a>
+    <a href="https://github.com/HelixW/bidding-backend/issues">Report Bug</a>
     ·
-    <a href="https://github.com/helixw/bidding-backend">Request Feature</a>
+    <a href="https://github.com/HelixW/bidding-backend/issues">Request Feature</a>
   </p>
 </p>
 
@@ -77,7 +77,7 @@ Make sure you have node.js version 8 or above to run this project.
 1. Clone the repository
 
    ```sh
-   git clone https://github.com/helixw/bidding-backend.git
+   git clone https://github.com/HelixW/bidding-backend.git
    ```
 
 2. Install NPM packages
@@ -97,7 +97,7 @@ Make sure you have node.js version 8 or above to run this project.
 
 ## Usage
 
-Documentation for the restful server is available at http://localhost:&lt;your-port&gt;/docs.
+Documentation for the restful server is available at `http://localhost:<your-port>/docs`.
 
 The server uses a global `/api` prefix for all routes.
 
@@ -113,7 +113,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 Shreyas K. - [Linkedin](https://www.linkedin.com/in/shreyas-k-0aa77018b) - <a href="mailto:shreyas.2000@hotmail.com">Business Email</a>
 
-Project Link - [https://github.com/helixw/bidding-backend](https://github.com/helixw/bidding-backend)
+Project Link - [https://github.com/HelixW/bidding-backend](https://github.com/HelixW/bidding-backend)
 
 <!-- ACKNOWLEDGEMENTS -->
 
