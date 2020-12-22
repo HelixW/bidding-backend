@@ -1,73 +1,138 @@
+<!-- PROJECT SHIELDS -->
+
+[![Dependencies][dependencies-shield]][dependencies-url]
+[![Issues][issues-shield]][issues-url]
+[![Size][size-shield]][size-url]
+[![License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
+<!-- PROJECT LOGO -->
+<br />
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
+  <a href="https://github.com/helixw/bidding-backend">
+    <img src="https://i.imgur.com/oKMuTpL.png" alt="Logo">
+  </a>
+
+  <h3 align="center">Auction Backend</h3>
+
+  <p align="center">
+    Server deals with feeding in of round data and all administrative actions and allotment of questions to the respective teams.
+    <br />
+    <br />
+    <a href="https://github.com/helixw/bidding-backend">Report Bug</a>
+    ·
+    <a href="https://github.com/helixw/bidding-backend">Request Feature</a>
+  </p>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgements">Acknowledgements</a></li>
+  </ol>
+</details>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+<!-- ABOUT THE PROJECT -->
 
-## Description
+## About The Project
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+The project was created to serve as a base for the auction in ACM-VIT's Reverse Coding event in 2020. The backend deals with serving details of the 3 auction rounds and allotment of questions to the respective teams. Another express server was created to work in conjunction to the current server to deliver real time updates for the auction.
 
-## Installation
+The backend is documented with the help of Swagger and the documentation is available on `/docs`.
 
-```bash
-$ npm install
-```
+### Built With
 
-## Running the app
+- [Nest.js](https://nestjs.com/)
+- [Firebase](https://firebase.google.com/)
 
-```bash
-# development
-$ npm run start
+<!-- GETTING STARTED -->
 
-# watch mode
-$ npm run start:dev
+## Getting Started
 
-# production mode
-$ npm run start:prod
-```
+The project runs on Node.js utilizing npm as the package manager.
 
-## Test
+### Prerequisites
 
-```bash
-# unit tests
-$ npm run test
+Make sure you have node.js version 8 or above to run this project.
 
-# e2e tests
-$ npm run test:e2e
+### Installation
 
-# test coverage
-$ npm run test:cov
-```
+1. Clone the repository
 
-## Support
+   ```sh
+   git clone https://github.com/helixw/bidding-backend.git
+   ```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. Create a `.env` file using the configuration in `.env.example`
+   ```sh
+   touch .env
+   ```
+4. Start the development server
+   ```sh
+   npm run start:dev
+   ```
 
-## Stay in touch
+<!-- USAGE -->
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+## Usage
+
+Documentation for the restful server is available at http://localhost:&lt;your-port&gt;/docs.
+
+The server uses a global `/api` prefix for all routes.
+
+<!-- LICENSE -->
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+Distributed under the MIT License. See `LICENSE` for more information.
+
+<!-- CONTACT -->
+
+## Contact
+
+Shreyas K. - [Linkedin](https://www.linkedin.com/in/shreyas-k-0aa77018b) - <a href="mailto:shreyas.2000@hotmail.com">Business Email</a>
+
+Project Link - [https://github.com/helixw/bidding-backend](https://github.com/helixw/bidding-backend)
+
+<!-- ACKNOWLEDGEMENTS -->
+
+## Acknowledgements
+
+- [Google Cloud Platform](https://cloud.google.com)
+- [Swagger](https://swagger.io/)
+- [Joi](https://joi.dev/)
+- [JSONWebToken](https://jwt.io/)
+
+<!-- LINKS & IMAGES -->
+
+[dependencies-shield]: https://img.shields.io/david/helixw/bidding-backend?style=for-the-badge
+[dependencies-url]: https://github.com/HelixW/bidding-backend/blob/master/package.json
+[issues-shield]: https://img.shields.io/github/issues-raw/helixw/bidding-backend?style=for-the-badge
+[issues-url]: https://github.com/HelixW/bidding-backend/issues
+[size-shield]: https://img.shields.io/github/repo-size/helixw/bidding-backend?style=for-the-badge
+[size-url]: https://github.com/helixw/bidding-backend
+[license-shield]: https://img.shields.io/github/license/helixw/bidding-backend?style=for-the-badge
+[license-url]: https://github.com/HelixW/bidding-backend/blob/master/LICENSE
+[linkedin-shield]: https://img.shields.io/badge/Linkedin-View_Profile-blue?style=for-the-badge&logo=linkedin
+[linkedin-url]: https://www.linkedin.com/in/shreyas-k-0aa77018b
