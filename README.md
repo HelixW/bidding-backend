@@ -59,8 +59,8 @@ The backend is documented with the help of Swagger and the documentation is avai
 
 ### Built With
 
-- [Nest.js](https://nestjs.com/)
-- [Firebase](https://firebase.google.com/)
+- [Nest.js][nestjs-url]
+- [Firebase][firebase-url]
 
 <!-- GETTING STARTED -->
 
@@ -111,18 +111,18 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Shreyas K. - [Linkedin](https://www.linkedin.com/in/shreyas-k-0aa77018b) - <a href="mailto:shreyas.2000@hotmail.com">Business Email</a>
+Shreyas K. - [Linkedin][personal-linkedin-url] - <a href="mailto:shreyas.2000@hotmail.com">Business Email</a>
 
-Project Link - [https://github.com/HelixW/bidding-backend](https://github.com/HelixW/bidding-backend)
+Project Link - [https://github.com/HelixW/bidding-backend][project-url]
 
 <!-- ACKNOWLEDGEMENTS -->
 
 ## Acknowledgements
 
-- [Google Cloud Platform](https://cloud.google.com)
-- [Swagger](https://swagger.io/)
-- [Joi](https://joi.dev/)
-- [JSONWebToken](https://jwt.io/)
+- [Google Cloud Platform][gcp-url]
+- [Swagger][swagger-url]
+- [Joi][joi-url]
+- [JSONWebToken][jwt-url]
 
 <!-- LINKS & IMAGES -->
 
@@ -136,3 +136,11 @@ Project Link - [https://github.com/HelixW/bidding-backend](https://github.com/He
 [license-url]: https://github.com/HelixW/bidding-backend/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/Linkedin-View_Profile-blue?style=for-the-badge&logo=linkedin
 [linkedin-url]: https://www.linkedin.com/in/shreyas-k-0aa77018b
+[nestjs-url]: https://nestjs.com/
+[firebase-url]: https://firebase.google.com/
+[personal-linkedin-url]: https://www.linkedin.com/in/shreyas-k-0aa77018b
+[project-url]: https://github.com/HelixW/bidding-backend
+[gcp-url]: https://cloud.google.com
+[swagger-url]: https://swagger.io/
+[joi-url]: https://joi.dev/
+[jwt-url]: https://jwt.io/
