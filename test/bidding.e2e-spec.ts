@@ -9,25 +9,22 @@ import * as request from 'supertest'
 describe('BiddingController (e2e)', () => {
   let app: INestApplication
 
-  // Mocks
+  /** Mocks */
   const questions = [
     {
       id: '1234',
-      start: 1608190500000,
-      expiry: 1608190500000,
     },
     {
       id: '5678',
-      start: 1608190500000,
-      expiry: 1608190500000,
     },
   ] as Array<Question>
 
   const roundRes = {
     name: 'Test Round',
-    minBid: 200,
+    startTime: 'Dec 20 2020 06:30:00 GMT+5:30',
     questions,
   } as Round
+
   const biddingService = {
     initializeRound: () => roundRes,
     fetchDetails: () => roundRes,
@@ -62,9 +59,9 @@ describe('BiddingController (e2e)', () => {
       .expect(roundRes)
   })
 
-  it('/bidding/allocate/:id (PUT)', () => {
+  it('/bidding/allocate (PUT)', () => {
     return request(app.getHttpServer())
-      .put('/bidding/allocate/0')
+      .put('/bidding/allocate')
       .expect(200)
       .expect(roundRes)
   })
